@@ -4,6 +4,7 @@ from DummyStocksData import DummyStockData
 from Strategies.Strategy import Strategy
 
 if __name__ == '__main__':
+    #updated code
     strategy = Strategy()
     m = Menu(strategy)
     m.start()
