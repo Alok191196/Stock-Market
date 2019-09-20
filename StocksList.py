@@ -1,11 +1,14 @@
 from Stock import Stock
 
 
-class Stocks:
+class StockList:
     stocks_list = {}
 
     def __init__(self):
         pass
+
+    def get_stocks_list(self):
+        return self.stocks_list
 
     def get_stock(self, instrument_token):
         if instrument_token in self.stocks_list:

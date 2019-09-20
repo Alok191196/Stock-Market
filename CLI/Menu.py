@@ -1,32 +1,39 @@
 from threading import Thread
 
-from Stocks import Stocks
+from StocksList import StockList
 
 
 class Menu(Thread):
 
-    def __init__(self, manager, strategy):
+    def __init__(self, strategy):
         Thread.__init__(self)
         self.daemon = True
-        self.manager = manager
         self.strategy = strategy
 
     def run(self):
         while True:
             command = int(input("Enter Command"))
             if command == 1:
-                instrument_token = input("instrument_token")
-                stock = Stocks().get_stock(instrument_token)
+                instrument_token = int(input("instrument_token"))
+                stock = StockList().get_stock(instrument_token)
                 s_id = int(input("Strategy Id"))
-                strategy = self.strategy.create_new_strategy(s_id, stock)
-                self.manager.insert(strategy)
-                # add new stock to watch list
-                pass
+                self.strategy.create_new_strategy(s_id, stock)
+
             elif command == 2:
-                for open in self.manager.get_open_positions():
-                    print(open)
-                # show list of stocks under Manager
-                pass
+                for strategy in self.strategy.get_running_strategy():
+                    print(strategy)
+
+            elif command == 3:
+                for strategy in self.strategy.get_triggered_strategy():
+                    print(strategy)
+
+            elif command == 4:
+                for strategy in self.strategy.get_finished_strategy():
+                    print(strategy)
+
+            elif command == 5:
+                for stock in StockList().get_stocks_list():
+                    print(stock)
             else:
                 pass
             pass
